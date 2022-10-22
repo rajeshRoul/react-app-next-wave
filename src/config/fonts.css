@@ -17,6 +17,12 @@
 }
 
 @font-face {
+    font-family: "HKGroteskMedium";
+    src: url(../assets/fonts/HKGroteskMedium.ttf);
+    font-display: swap;
+}
+
+@font-face {
     font-family: "RubikRegular";
     src: url(../assets/fonts/RubikRegular.ttf);
     font-display: swap;

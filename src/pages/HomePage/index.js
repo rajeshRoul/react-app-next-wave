@@ -1,6 +1,7 @@
 import SearchBar from "components/SearchBar";
 import TabSwitch from "components/TabSwitch";
 import { useState } from "react";
+import ResourceCard from "./components/Resource";
 import classes from "./homePage.module.scss";
 
 const HomePage = () => {
@@ -8,13 +9,23 @@ const HomePage = () => {
 
     return (
         <div className={classes.container}>
-            <div className={classes.tabSwitchCtr}>
-                <TabSwitch
-                    tabs={tabs}
-                    activeTab={activeTab}
-                    onChange={setActiveTab} />
+            <div className={classes.innerContainer}>
+                <div className={classes.tabSwitchCtr}>
+                    <TabSwitch
+                        tabs={tabs}
+                        activeTab={activeTab}
+                        onChange={setActiveTab} />
+                </div>
+                <SearchBar
+                    className={classes.searchBar}
+                    placeholder="Search"
+                    onChange={() => console.count("render")} />
+                <div className={classes.resourcesCtr}>
+                    <ResourceCard />
+                    <ResourceCard />
+                    <ResourceCard />
+                </div>
             </div>
-            <SearchBar className={classes.searchBar} onChange={() => console.count("render")}/>
         </div>
     )
 }
