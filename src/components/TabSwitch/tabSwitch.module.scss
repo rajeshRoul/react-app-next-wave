@@ -4,5 +4,28 @@
     height: 40px;
     box-sizing: border-box;
     background-color: #D7DFE9;
-    padding: 1px;
+    border: 1px solid #D7DFE9;
+    gap: 1px;
+    border-radius: 4px;
+    align-items: center;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.tab {
+    height: 100%;
+    flex-grow: 1;
+    font-family: 'HKGroteskSemiBold';
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #F2F4F7;
+}
+
+.active {
+    background-color: #0B69FF;
+    color: #FFFFFF;
 }
