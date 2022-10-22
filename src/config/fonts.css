@@ -1,0 +1,23 @@
+@font-face {
+    font-family: "HKGroteskBold";
+    src: url(../assets/fonts/HKGroteskBold.ttf);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "HKGroteskRegular";
+    src: url(../assets/fonts/HKGroteskRegular.ttf);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "HKGroteskSemiBold";
+    src: url(../assets/fonts/HKGroteskSemiBold.ttf);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "RubikRegular";
+    src: url(../assets/fonts/RubikRegular.ttf);
+    font-display: swap;
+}
