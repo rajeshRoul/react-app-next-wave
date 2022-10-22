@@ -1,0 +1,43 @@
+.container {
+    max-width: 648px;
+    flex-grow: 1;
+    height: 40px;
+    border: 1px solid #D7DFE9;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    gap: 16px;
+}
+
+.container input {
+    outline: none;
+    border: none;
+    font-family: 'HKGroteskRegular';
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.container input::placeholder {
+    font-family: 'HKGroteskRegular';
+    font-size: 14px;
+    line-height: 24px;
+    color: #7E858E99;
+    opacity: 1;
+}
+
+.container input:-ms-input-placeholder {
+    font-family: 'HKGroteskRegular';
+    font-size: 14px;
+    line-height: 24px;
+    color: #7E858E99;
+}
+
+.container input::-ms-input-placeholder {
+    font-family: 'HKGroteskRegular';
+    font-size: 14px;
+    line-height: 24px;
+    color: #7E858E99;
+}

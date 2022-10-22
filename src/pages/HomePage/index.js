@@ -1,3 +1,4 @@
+import SearchBar from "components/SearchBar";
 import TabSwitch from "components/TabSwitch";
 import { useState } from "react";
 import classes from "./homePage.module.scss";
@@ -5,14 +6,17 @@ import classes from "./homePage.module.scss";
 const HomePage = () => {
     const [activeTab, setActiveTab] = useState(tabs[0]);
 
-    return <div className={classes.container}>
-        <div className={classes.tabSwitchCtr}>
-            <TabSwitch
-                tabs={tabs}
-                activeTab={activeTab}
-                onChange={setActiveTab} />
+    return (
+        <div className={classes.container}>
+            <div className={classes.tabSwitchCtr}>
+                <TabSwitch
+                    tabs={tabs}
+                    activeTab={activeTab}
+                    onChange={setActiveTab} />
+            </div>
+            <SearchBar className={classes.searchBar} onChange={() => console.count("render")}/>
         </div>
-    </div>
+    )
 }
 
 const tabs = [
