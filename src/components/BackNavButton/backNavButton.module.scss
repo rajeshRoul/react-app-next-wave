@@ -1,0 +1,20 @@
+.container {
+    outline: none;
+    border: none;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+
+    & .label {
+        font-family: 'HKGroteskRegular';
+        font-size: 12px;
+        line-height: 16px;
+        color: #7E858E;
+    }
+
+    &:hover .label {
+        color: #0B69FF;
+    }
+}

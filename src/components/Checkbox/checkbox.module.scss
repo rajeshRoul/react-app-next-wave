@@ -1,0 +1,26 @@
+.container {
+    height: 16px;
+    width: 16px;
+    border-radius: 2px;
+    background: rgba(215, 223, 233, 0.4);
+    border: 1px solid #D7DFE9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0px;
+
+    & img {
+        display: none;
+    }
+
+    &.active {
+        border-color: #0055DC;
+        background: rgba(11, 105, 255, 0.1);
+
+        & img {
+            display: block;
+        }
+    }
+}
