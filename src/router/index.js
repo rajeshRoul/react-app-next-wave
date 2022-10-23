@@ -18,7 +18,7 @@ const Router = () => {
                     key="Route-base-home"
                     exact
                     path="/"
-                    element={<Navigate to="/home" replace />}
+                    element={<Navigate to="/resources" replace />}
                 />
                 {routes.map((route, index) => (
                     <Route

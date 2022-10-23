@@ -22,7 +22,7 @@ const ResourceAPI = {
         })
         if (res) {
             toast.update(toastId, {
-                render: "Resources List Updated",
+                render: "Resources List Refreshed",
                 type: "success",
                 isLoading: false,
                 autoClose: 5000
@@ -40,6 +40,17 @@ const ResourceAPI = {
                 isLoading: false,
                 autoClose: 5000
             })
+        }
+    },
+    getResourceById: async (id) => {
+        const res = await fetchData({
+            url: `https://media-content.ccbp.in/website/react-assignment/resource/${id}.json`,
+            method: fetchMethods.GET
+        })
+        if (res) {
+            return res;
+        } else {
+            toast.error("Failed to load Data");
         }
     }
 }

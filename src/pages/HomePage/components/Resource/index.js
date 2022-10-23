@@ -1,9 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import classes from "./resourceCard.module.scss";
 
 const ResourceCard = ({ resourceData }) => {
+    const navigate = useNavigate();
+
     return (
         <div className={classes.container}>
-            <div className={classes.headerCtr}>
+            <div
+                className={classes.headerCtr}
+                onClick={() => navigate(`/resources/view/${resourceData?.id}`)}>
                 <img src={resourceData?.icon_url} alt="" />
                 <div className={classes.headerInnerCtr}>
                     <div className={classes.titleText}>{resourceData?.title ?? ""}</div>

@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+    width: 100%;
+
+    & .header {
+        display: flex;
+        gap: 16px;
+
+        & img {
+            height: 64px;
+            width: 64px;
+            border-radius: 100px;
+            background-color: #FFFFFF;
+            border: 2px solid #D7DFE9;
+        }
+
+        & .dataCtr {
+            display: flex;
+            flex-direction: column;
+
+            & .title {
+                font-family: 'HKGroteskRegular';
+                font-size: 32px;
+                line-height: 40px;
+                color: #171F46;
+            }
+
+            & .category {
+                font-family: 'HKGroteskRegular';
+                font-size: 16px;
+                line-height: 24px;
+                color: #7E858E;
+            }
+        }
+    }
+
+    & .link {
+        text-decoration: none;
+        font-family: 'HKGroteskRegular';
+        font-size: 14px;
+        line-height: 24px;
+        color: #0B69FF;
+        margin-left: 80px;
+
+    }
+
+    & .description {
+        margin-top: 8px;
+        max-width: 552px;
+        font-family: 'HKGroteskRegular';
+        font-size: 14px;
+        line-height: 24px;
+        color: #7E858E;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+    }
+
+    & .btnCtr {
+        margin-top: 36px;
+    }
+}
