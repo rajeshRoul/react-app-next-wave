@@ -1,13 +1,46 @@
 import fetchData from "./utils/fetchData";
 import fetchMethods from "./utils/fetchMethods";
+import { resourceActions } from "redux/slices/resource";
+import store from "redux/store";
+import { toast } from "react-toastify";
+
+const { dispatch } = store;
 
 const ResourceAPI = {
-    getAllResources: async () => {
+    fetchResources: async () => {
+        const allResources = store?.getState()?.resource?.resources?.all || [];
+        let toastId;
+        // Loading toast for slow networks
+        if (allResources?.length) {
+            toastId = toast.loading("Refreshing Data");
+        } else {
+            toastId = toast.loading("Fetching Data");
+        }
         const res = await fetchData({
             url: "https://media-content.ccbp.in/website/react-assignment/resources.json",
             method: fetchMethods.GET
         })
-        console.log({ res })
+        if (res) {
+            toast.update(toastId, {
+                render: "Resources List Updated",
+                type: "success",
+                isLoading: false,
+                autoClose: 5000
+            })
+            if (res?.length) {
+                dispatch(resourceActions.setAllResources(res));
+                dispatch(resourceActions.setRequestsResources(res.filter((resource) => resource?.tag === "request")))
+                dispatch(resourceActions.setUsersResources(res.filter((resource) => resource?.tag === "user")))
+
+            }
+        } else {
+            toast.update(toastId, {
+                render: "Failed to Load Data",
+                type: "error",
+                isLoading: false,
+                autoClose: 5000
+            })
+        }
     }
 }
 

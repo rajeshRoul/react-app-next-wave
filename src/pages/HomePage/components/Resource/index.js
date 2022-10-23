@@ -1,19 +1,18 @@
 import classes from "./resourceCard.module.scss";
-import UserIcon from "assets/icons/UserIcon.svg"
 
-const ResourceCard = () => {
+const ResourceCard = ({ resourceData }) => {
     return (
         <div className={classes.container}>
             <div className={classes.headerCtr}>
-                <img src={UserIcon} alt="" />
+                <img src={resourceData?.icon_url} alt="" />
                 <div className={classes.headerInnerCtr}>
-                    <div className={classes.titleText}>Dropbox, Inc.</div>
-                    <div className={classes.typeText}>Dropbox, Inc.</div>
+                    <div className={classes.titleText}>{resourceData?.title ?? ""}</div>
+                    <div className={classes.typeText}>{resourceData?.category ?? ""}</div>
                 </div>
             </div>
-            <a href="" className={classes.siteLink}>www.dropbox.com</a>
+            <a href={resourceData?.link} className={classes.siteLink}>{resourceData?.link ?? ""}</a>
             <div className={classes.description}>
-            Slack brings the team together, wherever you are. With all of your communication and tools in one.... Slack brings the team together, wherever you are. With all of your communication and tools in one....
+                {resourceData?.description ?? ""}
             </div>
         </div>
     )

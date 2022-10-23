@@ -3,11 +3,21 @@ import { createSlice } from "@reduxjs/toolkit";
 export const resourceSlice = createSlice({
   name: "resource",
   initialState: {
-    resources: []
+    resources: {
+      all: [],
+      requests: [],
+      users: []
+    }
   },
   reducers: {
-    setResources: (state, action) => {
-      state.resources = action.payload || [];
+    setAllResources: (state, action) => {
+      state.resources.all = action.payload || [];
+    },
+    setRequestsResources: (state, action) => {
+      state.resources.requests = action.payload || [];
+    },
+    setUsersResources: (state, action) => {
+      state.resources.users = action.payload || [];
     },
   },
 });
