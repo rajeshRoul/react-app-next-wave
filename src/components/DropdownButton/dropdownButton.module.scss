@@ -1,0 +1,39 @@
+.container {
+    position: relative;
+
+    &:hover .menuCtr {
+        display: block;
+    }
+
+    & .menuCtr {
+        position: absolute;
+        padding: 6px 8px;
+        background: #FFFFFF;
+        border-radius: 4px;
+        right: 0px;
+        top: 36px;
+        display: none;
+        filter: drop-shadow(0px 4px 16px rgba(23, 31, 70, 0.16));
+
+        & .menuItem {
+            padding: 8px 16px;
+            font-family: 'HKGroteskRegular';
+            font-size: 14px;
+            line-height: 24px;
+            color: #7E858E;
+            border-radius: 2px;
+            cursor: pointer;
+            white-space: nowrap;
+
+            &:hover {
+                color: #171F46;
+                background-color: #D7DFE93D;
+            }
+
+            &.active {
+                color: #171F46;
+                background-color: #D7DFE93D;
+            }
+        }
+    }
+}
