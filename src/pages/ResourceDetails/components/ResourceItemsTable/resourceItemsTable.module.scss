@@ -1,0 +1,96 @@
+.container {
+    width: 100%;
+    margin-top: 36px;
+
+    & .tableHeaderCtr {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+
+        & .tableTitle {
+            font-family: 'HKGroteskRegular';
+            font-size: 24px;
+            line-height: 32px;
+            color: #171F46;
+        }
+
+        & .headerInnerCtr {
+            display: flex;
+            gap: 21px;
+            align-items: center;
+            flex-grow: 1;
+            justify-content: flex-end;
+        }
+    }
+}
+
+.sortBtn {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    height: 40px;
+}
+
+.tableCtr {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #D7DFE9;
+    border-radius: 7px 7px 0px 0px;
+    margin-top: 24px;
+
+    & .table {
+        width: 100%;
+
+        & thead tr {
+            text-align: left;
+
+            & th {
+                padding: 24px 25px;
+                font-family: 'HKGroteskSemiBold';
+                font-size: 12px;
+                line-height: 16px;
+                letter-spacing: 0.01em;
+                text-transform: uppercase;
+                color: #7E858E;
+
+            }
+        }
+
+        & tbody tr td {
+            border-top: 1px solid #D7DFE9;
+
+            &>div {
+                font-family: 'HKGroteskRegular';
+                font-size: 14px;
+                line-height: 24px;
+                color: #7E858E;
+                max-width: 250px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding: 20px 25px;
+
+                &.description {
+                    max-width: 344px;
+                }
+
+                &.link {
+                    color: #0B69FF;
+                }
+            }
+        }
+    }
+}
+
+.footerCtr {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+
+    & .actionBtnCtr {
+        display: flex;
+        gap: 24px;
+    }
+}
