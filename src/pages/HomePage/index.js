@@ -9,10 +9,26 @@ import classes from "./homePage.module.scss";
 const HomePage = () => {
     const [activeTab, setActiveTab] = useState(tabs[0]);
     const resources = useSelector(store => store?.resource?.resources || {});
+    const [resourceList, setResourceList] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
     useEffect(() => {
         ResourceAPI.fetchResources();
     }, [])
+
+    useEffect(() => {
+        if (searchText) {
+            const search = searchText.toLowerCase();
+            setResourceList(
+                resources?.[activeTab?.value]?.filter((resource) => (
+                    resource?.title?.toLowerCase()?.includes(search) ||
+                    resource?.category?.toLowerCase()?.includes(searchText)
+                )) || []
+            )
+        } else {
+            setResourceList(resources?.[activeTab.value] || [])
+        }
+    }, [resources, activeTab, searchText])
 
     return (
         <div className={classes.container}>
@@ -25,9 +41,10 @@ const HomePage = () => {
                 </div>
                 <SearchBar
                     className={classes.searchBar}
-                    placeholder="Search" />
+                    placeholder="Search"
+                    onChange={setSearchText} />
                 <div className={classes.resourcesCtr}>
-                    {resources?.[activeTab.value]?.map((resource) => (
+                    {resourceList.map((resource) => (
                         <ResourceCard key={resource?.id} resourceData={resource} />
                     ))}
                 </div>

@@ -18,7 +18,7 @@ const SearchBar = ({
         return () => clearTimeout(timeOutId);
     }
 
-    useEffect(() => onChange(finalText), [finalText])
+    useEffect(() => onChange(finalText), [finalText, onChange])
 
     return (
         <div className={`${classes.container} ${className}`} style={style}>
