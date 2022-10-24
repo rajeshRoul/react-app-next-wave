@@ -17,12 +17,28 @@ const Pagination = ({
                 pages.push({ type: pageTypes.page, content: i })
             }
         } else {
-            if (currentPage <= 2 || currentPage > (totalPages - 2)) {
+            if (currentPage <= 1 || currentPage > (totalPages - 1)) {
                 pages = [
                     { type: pageTypes.page, content: 1 },
                     { type: pageTypes.page, content: 2 },
                     { type: pageTypes.ellipsis, content: "..." },
                     { type: pageTypes.page, content: totalPages - 1 },
+                    { type: pageTypes.page, content: totalPages }
+                ]
+            } else if (currentPage <= 3) {
+                pages = [
+                    { type: pageTypes.page, content: 1 },
+                    { type: pageTypes.page, content: 2 },
+                    { type: pageTypes.page, content: 3 },
+                    { type: pageTypes.ellipsis, content: "..." },
+                    { type: pageTypes.page, content: totalPages }
+                ]
+            } else if (currentPage > totalPages-3) {
+                pages = [
+                    { type: pageTypes.page, content: 1 },
+                    { type: pageTypes.ellipsis, content: "..." },
+                    { type: pageTypes.page, content: totalPages-2 },
+                    { type: pageTypes.page, content: totalPages-1 },
                     { type: pageTypes.page, content: totalPages }
                 ]
             } else {
@@ -53,7 +69,7 @@ const Pagination = ({
     return (
         <div className={classes.container}>
             <div
-                className={classes.pageItem}
+                className={`${classes.pageItem} ${currentPage === 1 ? classes.disabled : ""}`}
                 onClick={() => onChange(currentPage > 1 ? currentPage - 1 : 1)}>
                 <img src={LeftArrowIcon} alt="Previous Page" />
             </div>
@@ -66,9 +82,9 @@ const Pagination = ({
                 </div>
             ))}
             <div
-                className={classes.pageItem}
+                className={`${classes.pageItem} ${currentPage === totalPages ? classes.disabled : ""}`}
                 onClick={() => onChange(currentPage < totalPages ? currentPage + 1 : totalPages)}>
-                <img src={RightArrowIcon} alt="Previous Page" />
+                <img src={RightArrowIcon} alt="Next Page" />
             </div>
         </div>
     )

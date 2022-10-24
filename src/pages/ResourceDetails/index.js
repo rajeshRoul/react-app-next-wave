@@ -21,8 +21,6 @@ const ResourceDetails = () => {
         }
     }
 
-    console.log({resourceData, resourceItems})
-
     useEffect(() => {
         if (id) {
             fetchResourceData();

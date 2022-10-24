@@ -19,12 +19,14 @@
         line-height: 16px;
         letter-spacing: 0.01em;
         color: #7E858E;
-
+        &:hover:not(.disabled) {
+            background-color: rgba(228, 231, 233, 0.24);
+        }
+        &.disabled {
+            opacity: 0.7;
+            cursor: auto;
+        }
         &.page {
-            &:hover {
-                background-color: rgba(215, 223, 233, 0.24);
-            }
-
             &.active {
                 border-color: #171F46;
                 color: #171F46;

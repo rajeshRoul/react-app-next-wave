@@ -9,29 +9,42 @@ import {
     useReactTable
 } from "@tanstack/react-table";
 import CheckBox from "components/Checkbox";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "components/Button";
 import Pagination from "components/Pagination";
 
 const columnHelper = createColumnHelper();
 
 const ResourceItemsTable = ({ resourceItems }) => {
+    const [tableData, setTableData] = useState([]);
     const [selectedRows, setSelectedRows] = useState({});
     const [selectedRowsCount, setSelectedRowsCount] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [{ pageIndex, pageSize }, setPagination] = useState({
+        pageIndex: 0,
+        pageSize: 10,
+    })
+    const [searchText, setSearchText] = useState("");
+    const [sortBy, setSortBy] = useState(sortOptions[0]);
+
+    const pagination = useMemo(() => ({
+        pageIndex,
+        pageSize,
+    }), [pageIndex, pageSize])
 
     const toggleRowClick = (id) => {
+        let selectedCount = 0;
         setSelectedRows(prev => {
             let newData = { ...prev };
             if (prev[id]) {
-                setSelectedRowsCount(prev => prev - 1);
+                selectedCount = -1;
                 newData[id] = false;
             } else {
-                setSelectedRowsCount(prev => prev + 1);
+                selectedCount = 1;
                 newData[id] = true;
             }
             return newData;
         })
+        setSelectedRowsCount(prev => prev + selectedCount);
     }
 
     const columns = [
@@ -66,10 +79,53 @@ const ResourceItemsTable = ({ resourceItems }) => {
     ];
 
     const table = useReactTable({
-        data: resourceItems,
+        data: tableData,
         columns,
-        getCoreRowModel: getCoreRowModel()
+        getCoreRowModel: getCoreRowModel(),
+        pageCount: Math.ceil((resourceItems?.length || 1) / 6),
+        state: {
+            pagination,
+        },
+        onPaginationChange: setPagination,
+        manualPagination: true,
     });
+
+    const updateTableData = () => {
+        let filteredItems = resourceItems?.filter(
+            (item) => item?.title?.toLowerCase()?.includes(searchText?.toLowerCase())
+        );
+        switch (sortBy.value) {
+            // Recently Added
+            case sortOptions[0].value:
+                filteredItems?.sort(({ createdAt: a }, { createdAt: b }) => (Date.parse(b) - Date.parse(a)))
+                break;
+            // Ascending
+            case sortOptions[1].value:
+                filteredItems?.sort((a, b) => {
+                    if (a.title < b.title) return -1;
+                    if (a.title > b.title) return 1;
+                    if (a.description < b.description) return -1;
+                    if (a.description > b.description) return 1;
+                    return 0;
+                })
+                break;
+            // Descending
+            case sortOptions[2].value:
+                filteredItems?.sort((a, b) => {
+                    if (a.title > b.title) return -1;
+                    if (a.title < b.title) return 1;
+                    if (a.description > b.description) return -1;
+                    if (a.description < b.description) return 1;
+                    return 0;
+                })
+        }
+        const sliceIndex = pageIndex * 6
+        setTableData(filteredItems.slice(sliceIndex, sliceIndex + 6));
+    }
+
+    useEffect(() => {
+        updateTableData();
+    }, [resourceItems, sortBy, searchText, pageIndex])
 
     return (
         <div className={classes.container}>
@@ -79,7 +135,10 @@ const ResourceItemsTable = ({ resourceItems }) => {
                 </div>
                 <div className={classes.headerInnerCtr}>
                     <SearchBar />
-                    <DropdownButton menuItems={filterItems} >
+                    <DropdownButton
+                        activeItem={sortBy}
+                        onChange={setSortBy}
+                        menuItems={sortOptions} >
                         <div className={classes.sortBtn}>
                             <img src={SortIcon} alt="" />
                             <div>Sort</div>
@@ -121,21 +180,24 @@ const ResourceItemsTable = ({ resourceItems }) => {
             <div className={classes.footerCtr}>
                 <div className={classes.actionBtnCtr}>
                     <Button
-                        variant={Boolean(selectedRowsCount) ? "green" : "disabled"}>
+                        variant={Boolean(selectedRowsCount) ? "disabled" : "green"}>
                         Add Item
                     </Button>
                     <Button
-                        variant={Boolean(selectedRowsCount) ? "disabled" : "red"}>
+                        variant={Boolean(selectedRowsCount) ? "red" : "disabled"}>
                         Delete
                     </Button>
                 </div>
-                <Pagination currentPage={currentPage} onChange={setCurrentPage} totalPages={10} />
+                <Pagination
+                    currentPage={table.getState().pagination.pageIndex + 1}
+                    onChange={(page) => table.setPageIndex(page - 1)}
+                    totalPages={table.getPageCount()} />
             </div>
         </div>
     )
 }
 
-const filterItems = [
+const sortOptions = [
     {
         label: "Recently Added",
         value: "Recently Added"
