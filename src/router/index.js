@@ -3,7 +3,8 @@ import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import routes from "./routes";
 const NotFound = React.lazy(() => import("pages/NotFound"));
-const Authentication = React.lazy(() => import("pages/Authentication"));
+const SignUp = React.lazy(() => import("pages/Authentication/SignUp"));
+const Login = React.lazy(() => import("pages/Authentication/Login"));
 
 const Router = () => {
     return (
@@ -11,8 +12,13 @@ const Router = () => {
             <Routes>
                 <Route
                     key="Route-userOnboard"
-                    path="/user-onboard"
-                    element={<Suspense fallback={<h1>Loading...</h1>}><Authentication /></Suspense>}
+                    path="/signup"
+                    element={<Suspense fallback={<h1>Loading...</h1>}><SignUp /></Suspense>}
+                />
+                <Route
+                    key="Route-user-login"
+                    path="/login"
+                    element={<Suspense fallback={<h1>Loading...</h1>}><Login /></Suspense>}
                 />
                 <Route
                     key="Route-base-home"

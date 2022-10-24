@@ -1,0 +1,80 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+
+    & .card {
+        box-sizing: border-box;
+        width: 360px;
+        padding: 20px;
+        background-color: #FFFFFF;
+        filter: drop-shadow(0px 4px 16px rgba(23, 31, 70, 0.16));
+        border-radius: 5px;
+
+        & .profilePicCtr {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ebeef2;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            border: 1px solid #a2a2a2;
+            cursor: pointer;
+
+            & .profilePic {
+                height: 100%;
+                width: 100%;
+            }
+
+            & .editButton {
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                bottom: 3px;
+                right: 5px;
+            }
+        }
+
+        & .formFieldsCtr {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            & .nameFieldCtr {
+                display: flex;
+                gap: 10px;
+                align-items: flex-end;
+            }
+
+            & .titleText {
+                font-family: 'RubikRegular';
+                font-size: 32px;
+                line-height: 40px;
+                width: 100%;
+                text-align: center;
+                color: #171F46;
+            }
+        }
+    }
+}
+
+.existingUser {
+    font-family: 'HKGroteskRegular';
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #7E858E;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    & * {
+        text-decoration: none;
+        color: #0B69FF;
+        font-family: 'HKGroteskSemiBold';
+        margin-left: 5px;
+    }
+}
