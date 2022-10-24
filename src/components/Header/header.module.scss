@@ -8,6 +8,10 @@
     border-bottom: 1px solid #D7DFE9;
     box-sizing: border-box;
     padding: 0px 40px 0px 48px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
 }
 
 .userIcon {
@@ -15,4 +19,5 @@
     width: 40px;
     border-radius: 100px;
     object-fit: contain;
+    cursor: pointer;
 }
