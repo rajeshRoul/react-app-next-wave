@@ -1,0 +1,35 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+    overflow: hidden;
+
+    & .leftCtr {
+        min-width: 50%;
+        flex-grow: 1;
+        box-sizing: border-box;
+
+        & .backBtnCtr {
+            margin-top: 22px;
+            margin-left: 48px;
+        }
+
+        & .formCtr {
+            width: 100%;
+            min-width: 350px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    & .imageContainer {
+        max-width: 50%;
+        box-sizing: border-box;
+        flex-shrink: 1;
+
+        & img {
+            object-fit: cover;
+        }
+    }
+}

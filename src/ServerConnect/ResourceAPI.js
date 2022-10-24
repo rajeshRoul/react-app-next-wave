@@ -52,6 +52,19 @@ const ResourceAPI = {
         } else {
             toast.error("Failed to load Data");
         }
+    },
+    createResourceItem: async (payload) => {
+        const res = await fetchData({
+            url: `https://media-content.ccbp.in/website/react-assignment/add_resource.json`,
+            method: fetchMethods.GET,
+            body: payload
+        })
+        if (res) {
+            toast.success("Resource Item Created Successfully");
+            return res;
+        } else {
+            toast.error("Failed to Create Resource Item");
+        }
     }
 }
 

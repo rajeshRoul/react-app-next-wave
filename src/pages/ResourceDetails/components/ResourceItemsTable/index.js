@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from "react";
 import Button from "components/Button";
 import Pagination from "components/Pagination";
 import { toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 
 const columnHelper = createColumnHelper();
 
@@ -26,6 +27,8 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
     })
     const [searchText, setSearchText] = useState("");
     const [sortBy, setSortBy] = useState(sortOptions[0]);
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     const pagination = useMemo(() => ({
         pageIndex,
@@ -144,7 +147,7 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
                     Items
                 </div>
                 <div className={classes.headerInnerCtr}>
-                    <SearchBar />
+                    <SearchBar onChange={setSearchText} />
                     <DropdownButton
                         activeItem={sortBy}
                         onChange={setSortBy}
@@ -157,7 +160,7 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
                 </div>
             </div>
             <div className={classes.tableCtr}>
-                <table className={classes.table} cellspacing="0">
+                <table className={classes.table} cellSpacing="0">
                     <thead>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
@@ -177,7 +180,6 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
                     <tbody>
                         {table.getRowModel().rows.map((row) => (
                             <tr key={row.id} className={Boolean(selectedRows[row?.original?.id]) ? classes.activeRow : ""}>
-                                {console.log({ row: row })}
                                 {row.getVisibleCells().map((cell) => (
                                     <td key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -191,6 +193,7 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
             <div className={classes.footerCtr}>
                 <div className={classes.actionBtnCtr}>
                     <Button
+                        onClick={() => navigate(`/resources/view/${id}/add-item`)}
                         variant={Boolean(selectedRowsCount) ? "disabled" : "green"}>
                         Add Item
                     </Button>
