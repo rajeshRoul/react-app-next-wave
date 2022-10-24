@@ -12,10 +12,11 @@ import CheckBox from "components/Checkbox";
 import { useEffect, useMemo, useState } from "react";
 import Button from "components/Button";
 import Pagination from "components/Pagination";
+import { toast } from "react-toastify";
 
 const columnHelper = createColumnHelper();
 
-const ResourceItemsTable = ({ resourceItems }) => {
+const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
     const [tableData, setTableData] = useState([]);
     const [selectedRows, setSelectedRows] = useState({});
     const [selectedRowsCount, setSelectedRowsCount] = useState(0);
@@ -45,6 +46,15 @@ const ResourceItemsTable = ({ resourceItems }) => {
             return newData;
         })
         setSelectedRowsCount(prev => prev + selectedCount);
+    }
+
+    const handleDelete = () => {
+        if (Boolean(selectedRowsCount)) {
+            setResourceItems(resourceItems.filter((row) => !selectedRows[row.id]));
+            setSelectedRowsCount(0);
+            setSelectedRows({});
+            toast.success("Items Deleted Successfully")
+        }
     }
 
     const columns = [
@@ -147,7 +157,7 @@ const ResourceItemsTable = ({ resourceItems }) => {
                 </div>
             </div>
             <div className={classes.tableCtr}>
-                <table className={classes.table}>
+                <table className={classes.table} cellspacing="0">
                     <thead>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <tr key={headerGroup.id}>
@@ -166,7 +176,8 @@ const ResourceItemsTable = ({ resourceItems }) => {
                     </thead>
                     <tbody>
                         {table.getRowModel().rows.map((row) => (
-                            <tr key={row.id}>
+                            <tr key={row.id} className={Boolean(selectedRows[row?.original?.id]) ? classes.activeRow : ""}>
+                                {console.log({ row: row })}
                                 {row.getVisibleCells().map((cell) => (
                                     <td key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -184,6 +195,7 @@ const ResourceItemsTable = ({ resourceItems }) => {
                         Add Item
                     </Button>
                     <Button
+                        onClick={handleDelete}
                         variant={Boolean(selectedRowsCount) ? "red" : "disabled"}>
                         Delete
                     </Button>

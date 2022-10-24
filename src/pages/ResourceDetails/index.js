@@ -30,8 +30,8 @@ const ResourceDetails = () => {
     return (
         <div className={classes.container}>
             <BackNavButton label="Resources" onClick={() => navigate("/resources")} />
-            <ResourceInfoSection resourceData={resourceData}/>
-            <ResourceItemsTable resourceItems={resourceItems}/>
+            <ResourceInfoSection resourceData={resourceData} />
+            <ResourceItemsTable resourceItems={resourceItems} setResourceItems={setResourceItems} />
         </div>
     )
 }

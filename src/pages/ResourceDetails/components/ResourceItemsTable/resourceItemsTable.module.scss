@@ -42,6 +42,7 @@
 
     & .table {
         width: 100%;
+        border: none;
 
         & thead tr {
             text-align: left;
@@ -58,29 +59,36 @@
             }
         }
 
-        & tbody tr td {
-            border-top: 1px solid #D7DFE9;
+        & tbody tr {
+            & td {
+                border-top: 1px solid #D7DFE9;
 
-            &>div, .link {
-                font-family: 'HKGroteskRegular';
-                font-size: 14px;
-                line-height: 24px;
-                color: #7E858E;
-                max-width: 250px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                padding: 20px 25px;
+                &>div,
+                .link {
+                    font-family: 'HKGroteskRegular';
+                    font-size: 14px;
+                    line-height: 24px;
+                    color: #7E858E;
+                    max-width: 250px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding: 20px 25px;
 
-                &.description {
-                    max-width: 344px;
+                    &.description {
+                        max-width: 344px;
+                    }
+
+                    &.link {
+                        padding: 0px;
+                        text-decoration: none;
+                        color: #0B69FF;
+                    }
                 }
+            }
 
-                &.link {
-                    padding: 0px;
-                    text-decoration: none;
-                    color: #0B69FF;
-                }
+            &.activeRow {
+                background-color: rgba(215, 223, 233, 0.24);
             }
         }
     }
