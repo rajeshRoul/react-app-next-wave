@@ -12,7 +12,7 @@ const Pagination = ({
 
     const initPagesData = () => {
         let pages = [];
-        if (totalPages <= 4) {
+        if (totalPages <= 5) {
             for (let i = 1; i <= totalPages; ++i) {
                 pages.push({ type: pageTypes.page, content: i })
             }
