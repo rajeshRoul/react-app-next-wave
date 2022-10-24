@@ -1,11 +1,16 @@
 import ItemsImage from "assets/images/ItemsImage.png";
 import BackNavButton from "components/BackNavButton";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./addResourceItem.module.scss";
 import AddResourceItemForm from "./components/form";
 
 const AddResourceItem = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div className={classes.container}>
@@ -14,7 +19,7 @@ const AddResourceItem = () => {
                     <BackNavButton label="Back" onClick={() => navigate(-1)} />
                 </div>
                 <div className={classes.formCtr}>
-                    <AddResourceItemForm/>
+                    <AddResourceItemForm />
                 </div>
             </div>
             <div className={classes.imageContainer}>
