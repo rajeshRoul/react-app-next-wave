@@ -4,6 +4,7 @@
 
     & .tableHeaderCtr {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
         gap: 20px;
@@ -96,11 +97,40 @@
 
 .footerCtr {
     display: flex;
+    gap: 20px;
+    flex-wrap: wrap-reverse;
     justify-content: space-between;
     margin-top: 24px;
 
     & .actionBtnCtr {
         display: flex;
         gap: 24px;
+    }
+}
+
+@media only screen and (max-width: 885px) {
+    .tableCtr table {
+        & tbody tr td {
+
+            &>div,
+            .link {
+                max-width: 150px !important;
+                padding: 20px 10px !important;
+            }
+        }
+        & thead tr th {
+            padding: 20px 10px !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .tableCtr table tbody tr td {
+
+        &>div,
+        .link {
+            max-width: 70px !important;
+            padding: 20px 5px !important;
+        }
     }
 }
