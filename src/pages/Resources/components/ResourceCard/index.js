@@ -15,7 +15,10 @@ const ResourceCard = ({ resourceData }) => {
                     <div className={classes.typeText}>{resourceData?.category ?? ""}</div>
                 </div>
             </div>
-            <a href={resourceData?.link} className={classes.siteLink}>{resourceData?.link ?? ""}</a>
+            <a
+                href={resourceData?.link}
+                target="_blank" rel="noopener noreferrer"
+                className={classes.siteLink}>{resourceData?.link ?? ""}</a>
             <div className={classes.description}>
                 {resourceData?.description ?? ""}
             </div>

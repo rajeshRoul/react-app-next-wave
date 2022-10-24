@@ -3,10 +3,10 @@ import TabSwitch from "components/TabSwitch";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ResourceAPI from "ServerConnect/ResourceAPI";
-import ResourceCard from "./components/Resource";
-import classes from "./homePage.module.scss";
+import ResourceCard from "./components/ResourceCard";
+import classes from "./resources.module.scss";
 
-const HomePage = () => {
+const Resources = () => {
     const [activeTab, setActiveTab] = useState(tabs[0]);
     const resources = useSelector(store => store?.resource?.resources || {});
     const [resourceList, setResourceList] = useState([]);
@@ -68,4 +68,4 @@ const tabs = [
     }
 ]
 
-export default HomePage;
+export default Resources;

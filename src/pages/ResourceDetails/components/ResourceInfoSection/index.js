@@ -15,7 +15,11 @@ const ResourceInfoSection = ({ resourceData }) => {
                     </div>
                 </div>
             </div>
-            <a href={resourceData?.link} className={classes.link}>
+            <a
+                href={resourceData?.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.link}>
                 {resourceData?.link ?? ""}
             </a>
             <div className={classes.description}>
