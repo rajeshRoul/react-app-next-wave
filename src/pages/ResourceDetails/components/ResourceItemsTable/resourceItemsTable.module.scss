@@ -61,7 +61,7 @@
         & tbody tr td {
             border-top: 1px solid #D7DFE9;
 
-            &>div {
+            &>div, .link {
                 font-family: 'HKGroteskRegular';
                 font-size: 14px;
                 line-height: 24px;
@@ -77,6 +77,8 @@
                 }
 
                 &.link {
+                    padding: 0px;
+                    text-decoration: none;
                     color: #0B69FF;
                 }
             }

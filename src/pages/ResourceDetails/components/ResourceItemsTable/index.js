@@ -55,7 +55,13 @@ const ResourceItemsTable = ({ resourceItems }) => {
         }),
         columnHelper.accessor("link", {
             header: () => "Link",
-            cell: ({ getValue }) => <div className={classes.link}>{getValue()}</div>
+            cell: ({ getValue }) => (
+                <div>
+                    <a href={getValue()} target="_blank" rel="noopener noreferrer" className={classes.link}>
+                        {getValue()}
+                    </a>
+                </div>
+            )
         })
     ];
 
@@ -123,7 +129,7 @@ const ResourceItemsTable = ({ resourceItems }) => {
                         Delete
                     </Button>
                 </div>
-                <Pagination currentPage={currentPage} onChange={setCurrentPage} totalPages={10}/>
+                <Pagination currentPage={currentPage} onChange={setCurrentPage} totalPages={10} />
             </div>
         </div>
     )
