@@ -25,6 +25,7 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
         pageIndex: 0,
         pageSize: 10,
     })
+    const [totalPages, setTotalPages] = useState(1);
     const [searchText, setSearchText] = useState("");
     const [sortBy, setSortBy] = useState(sortOptions[0]);
     const { id } = useParams();
@@ -132,6 +133,7 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
                     return 0;
                 })
         }
+        setTotalPages(Math.ceil((filteredItems?.length || 1) / 6))
         const sliceIndex = pageIndex * 6
         setTableData(filteredItems.slice(sliceIndex, sliceIndex + 6));
     }
@@ -147,7 +149,7 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
                     Items
                 </div>
                 <div className={classes.headerInnerCtr}>
-                    <SearchBar onChange={setSearchText} />
+                    <SearchBar placeholder="Search" onChange={setSearchText} />
                     <DropdownButton
                         activeItem={sortBy}
                         onChange={setSortBy}
@@ -206,7 +208,7 @@ const ResourceItemsTable = ({ resourceItems, setResourceItems }) => {
                 <Pagination
                     currentPage={table.getState().pagination.pageIndex + 1}
                     onChange={(page) => table.setPageIndex(page - 1)}
-                    totalPages={table.getPageCount()} />
+                    totalPages={totalPages} />
             </div>
         </div>
     )
