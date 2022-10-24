@@ -1,3 +1,4 @@
+import Pagination from "components/Pagination";
 import SearchBar from "components/SearchBar";
 import TabSwitch from "components/TabSwitch";
 import { useEffect, useState } from "react";
@@ -11,24 +12,26 @@ const Resources = () => {
     const resources = useSelector(store => store?.resource?.resources || {});
     const [resourceList, setResourceList] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState();
 
     useEffect(() => {
         ResourceAPI.fetchResources();
     }, [])
 
     useEffect(() => {
+        let newList = resources?.[activeTab.value] || [];
         if (searchText) {
             const search = searchText.toLowerCase();
-            setResourceList(
-                resources?.[activeTab?.value]?.filter((resource) => (
-                    resource?.title?.toLowerCase()?.includes(search) ||
-                    resource?.category?.toLowerCase()?.includes(searchText)
-                )) || []
-            )
-        } else {
-            setResourceList(resources?.[activeTab.value] || [])
+            newList = resources?.[activeTab?.value]?.filter((resource) => (
+                resource?.title?.toLowerCase()?.includes(search) ||
+                resource?.category?.toLowerCase()?.includes(searchText)
+            )) || []
         }
-    }, [resources, activeTab, searchText])
+        setTotalPages(Math.ceil((newList?.length || 1) / 6));
+        const sliceIndex = ((currentPage - 1) * 6)
+        setResourceList(newList.slice(sliceIndex, sliceIndex + 6))
+    }, [resources, activeTab, searchText, currentPage])
 
     return (
         <div className={classes.container}>
@@ -47,6 +50,12 @@ const Resources = () => {
                     {resourceList.map((resource) => (
                         <ResourceCard key={resource?.id} resourceData={resource} />
                     ))}
+                </div>
+                <div className={classes.paginationCtr}>
+                    <Pagination
+                        currentPage={currentPage}
+                        onChange={setCurrentPage}
+                        totalPages={totalPages} />
                 </div>
             </div>
         </div>

@@ -61,6 +61,10 @@ const Pagination = ({
     }
 
     useEffect(() => {
+        if(currentPage <= 0 || currentPage > totalPages){
+            onChange(1);
+            return;
+        }
         if (totalPages && currentPage) {
             initPagesData();
         }
