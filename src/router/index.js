@@ -6,8 +6,10 @@ const SignUp = React.lazy(() => import("pages/Authentication/SignUp"));
 const Login = React.lazy(() => import("pages/Authentication/Login"));
 
 const Router = () => {
+    const baseUrl = window.location.hostname === "localhost" ? "" : "/react-app-nxt-wave"
+
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={baseUrl}>
             <Routes>
                 <Route
                     key="Route-userOnboard"
