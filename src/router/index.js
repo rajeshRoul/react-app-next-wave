@@ -2,7 +2,6 @@ import AuthenticationHoc from "hoc/Authentication";
 import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import routes from "./routes";
-const NotFound = React.lazy(() => import("pages/NotFound"));
 const SignUp = React.lazy(() => import("pages/Authentication/SignUp"));
 const Login = React.lazy(() => import("pages/Authentication/Login"));
 
@@ -39,7 +38,7 @@ const Router = () => {
                         }
                     />
                 ))}
-                <Route path="*" element={<Suspense fallback={<h1>Loading...</h1>}><NotFound /></Suspense>} />
+                <Route path="*" element={<Navigate to="/resources" replace />} />
             </Routes>
         </BrowserRouter>
     );

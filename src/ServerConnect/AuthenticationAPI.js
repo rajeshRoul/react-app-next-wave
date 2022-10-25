@@ -1,5 +1,3 @@
-import fetchData from "./utils/fetchData";
-import fetchMethods from "./utils/fetchMethods";
 import { userActions } from "redux/slices/user";
 import store from "redux/store";
 import { toast } from "react-toastify";
