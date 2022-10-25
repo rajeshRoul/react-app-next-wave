@@ -1,6 +1,7 @@
 import Button from "components/Button";
 import TextField from "components/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import AuthenticationAPI from "ServerConnect/AuthenticationAPI";
 import classes from "../authentication.module.scss";
@@ -9,6 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const isLoggedIn = useSelector((store) => store?.user?.isLoggedIn);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,9 +18,13 @@ const Login = () => {
             email: email?.trim()?.toLowerCase(),
             password
         }
-        const res = AuthenticationAPI.loginUser(payload);
-        if (res) navigate("/resources");
+        AuthenticationAPI.loginUser(payload);
     }
+
+    useEffect(() => {
+        if (isLoggedIn)
+            navigate("/resources");
+    }, [isLoggedIn])
 
     return (
         <div className={classes.container}>

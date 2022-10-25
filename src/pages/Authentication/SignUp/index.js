@@ -3,9 +3,10 @@ import TextField from "components/TextField";
 import classes from "../authentication.module.scss";
 import UserIcon from "assets/icons/UserIcon.svg";
 import EditIcon from "assets/icons/EditIcon.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AuthenticationAPI from "ServerConnect/AuthenticationAPI";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
     const inputRef = useRef(null);
@@ -14,6 +15,7 @@ const SignUp = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const isLoggedIn = useSelector((store) => store?.user?.isLoggedIn);
 
     const onFileSelected = (e) => {
         if (e?.target?.files?.[0])
@@ -31,6 +33,11 @@ const SignUp = () => {
         const res = AuthenticationAPI.signupUser(payload);
         if (res) navigate("/login");
     }
+
+    useEffect(() => {
+        if (isLoggedIn)
+            navigate("/resources");
+    }, [isLoggedIn])
 
     return (
         <div className={classes.container}>
